@@ -33,6 +33,8 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
 
+    sendfile off;
+
     root /home/vagrant/laravel/public;
     index index.php index.html index.htm;
 
