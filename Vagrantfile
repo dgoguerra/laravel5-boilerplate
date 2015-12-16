@@ -18,8 +18,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # set the hostname
   config.vm.hostname = "laravel-app"
 
-  # enable port forwarding
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  # enable port forwarding with collision detection
+  config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
 
   # set synced folder
   config.vm.synced_folder ".", "/home/vagrant/laravel"
