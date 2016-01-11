@@ -106,8 +106,18 @@ sudo service mysql restart
 
 echo ">>> Installing Composer"
 
+# insecute, pipe straight to php
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
+
+
+echo ">>> Installing Node & NPM"
+
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# npm install. insecure, pipe straight to the rooted shell
+curl -L https://www.npmjs.org/install.sh | sudo sh
 
 
 echo ">>> Laravel: Set Project .env"
