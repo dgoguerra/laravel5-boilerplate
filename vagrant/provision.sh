@@ -36,7 +36,7 @@ server {
     sendfile off;
 
     root /home/vagrant/laravel/public;
-    index index.php index.html index.htm;
+    index index.html index.php;
 
     server_name localhost;
 
