@@ -5,3 +5,19 @@ $font-family-base: 'Lato', sans-serif;
 
 $fa-font-path: './fonts';
 @import "./node_modules/font-awesome/scss/font-awesome.scss";
+
+.flex-center {
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.laravel-title {
+  font-family: 'Lato';
+  font-weight: 100;
+  font-size: 96px;
+}

@@ -45,6 +45,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Email Registration Confirmation
+    |--------------------------------------------------------------------------
+    |
+    | Boolean flag to control whether or not accounts emails need to be validated
+    | by sending a confirmation email.
+    |
+    */
+
+    'email_confirmation' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Password Reset Settings
     |--------------------------------------------------------------------------
     |
