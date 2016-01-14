@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\User;
 use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -58,18 +60,27 @@ class AuthController extends Controller
     protected $mailer;
 
     /**
+     * Events dispatcher.
+     *
+     * @var \Illuminate\Contracts\Events\Dispatcher
+     */
+    protected $dispatcher;
+
+    /**
      * Create a new authentication controller instance.
      *
      * @param Guard $auth
      * @param ConfigRepository $config
      * @param Mailer $mailer
+     * @param Dispatcher $dispatcher
      * @param UrlGenerator $generator
      */
-    public function __construct(Guard $auth, ConfigRepository $config, Mailer $mailer, UrlGenerator $generator)
+    public function __construct(Guard $auth, ConfigRepository $config, Mailer $mailer, Dispatcher $dispatcher, UrlGenerator $generator)
     {
         $this->auth = $auth;
         $this->config = $config;
         $this->mailer = $mailer;
+        $this->dispatcher = $dispatcher;
 
         // set the authenticated users landing page url.
         $this->redirectTo = $generator->route('user.home');
@@ -139,6 +150,8 @@ class AuthController extends Controller
         }
 
         $user = $this->create($request->all());
+
+        $this->dispatcher->fire(new UserRegistered($user));
 
         // if email confirmation is active, he can't log in yet. Show a 'registration was successful'
         // message and send him an email to confirm his email address.
