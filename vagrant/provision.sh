@@ -82,6 +82,10 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 sudo apt-get install -y mysql-server php5-mysql
 
+# Install and enable mysql native driver
+sudo apt-get -y install php5-mysqlnd
+sudo php5enmod mysqlnd
+
 # Setup the DB and credentials
 
 mysql -u root -proot <<- EOF
