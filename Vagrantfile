@@ -12,6 +12,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # set up provisioning
   config.vm.provision :shell, path: "vagrant/provision.sh"
 
+  # add host's default ssh key and .gitconfig to the vagrant machine
+  config.vm.provision :file, source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
+  config.vm.provision :file, source: "~/.gitconfig", destination: "~/.gitconfig"
+
   # start apache server on boot
   config.vm.provision "shell", inline: "service nginx restart", run: "always"
 
