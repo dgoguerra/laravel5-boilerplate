@@ -16,7 +16,10 @@ sudo apt-get update
 
 echo ">>> Installing Nginx & PHP"
 
-sudo apt-get -y install nginx php5-fpm php5-cli php5-mcrypt git
+sudo apt-get install -y nginx php5-fpm php5-cli php5-mcrypt
+
+# Install other general dependencies. SQLite may be used for testing with an in-memory database
+sudo apt-get install -y git php5-sqlite
 
 # Uncomment cgi.fix_pathinfo and set it to 0
 sudo sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php5/fpm/php.ini
