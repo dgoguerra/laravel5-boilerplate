@@ -6,6 +6,10 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  config.vm.provider :virtualbox do |v|
+    v.memory = 1024
+  end
+
   # virtualbox box config
   config.vm.box = "ubuntu/trusty32"
 
@@ -17,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :file, source: "~/.gitconfig", destination: "~/.gitconfig"
 
   # start apache server on boot
-  config.vm.provision "shell", inline: "service nginx restart", run: "always"
+  config.vm.provision :shell, inline: "service nginx restart", run: "always"
 
   # set the hostname
   config.vm.hostname = "laravel-app"
